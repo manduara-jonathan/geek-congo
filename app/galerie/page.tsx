@@ -1,10 +1,20 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowLeft, Download } from "lucide-react"
+import { useCartStore } from "@/lib/store"
 
 export default function GaleriePage() {
+  const { clearCart } = useCartStore()
+
+  const handleBuyTickets = () => {
+    clearCart()
+    window.location.href = "/"
+  }
+
   const affiches = [
     {
       src: "/affiches/affiche-principale.jpg",
@@ -105,11 +115,9 @@ export default function GaleriePage() {
         </div>
 
         <div className="text-center mt-12">
-          <Link href="/checkout">
-            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white px-8 py-3">
-              Acheter mes billets maintenant
-            </Button>
-          </Link>
+          <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white px-8 py-3" onClick={handleBuyTickets}>
+            Acheter mes billets maintenant
+          </Button>
         </div>
       </div>
       {/* Footer */}
